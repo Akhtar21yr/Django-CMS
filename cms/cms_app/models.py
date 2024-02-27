@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser):
-    email = models.EmailField(unique = True,validators=[EmailValidator()])
+    email = models.EmailField(max_length=255,unique = True,validators=[EmailValidator()])
     password = models.CharField(
         max_length = 225,
         validators = [
@@ -30,7 +30,7 @@ class CustomUser(AbstractBaseUser):
         ]
     )
     full_name = models.CharField(max_length = 255)
-    phone = models.CharField(max_length = 10,validators = [RegexValidator(regex='^[0-9]{10}$',message='phone no. must be 10 digits')])
+    phone = models.CharField(max_length = 10,unique=True,validators = [RegexValidator(regex='^[0-9]{10}$',message='phone no. must be 10 digits')])
     address = models.CharField(max_length = 250,null = True)
     city = models.CharField(max_length = 100, null = True)
     state = models.CharField(max_length=100,null = True)

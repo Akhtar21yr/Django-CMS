@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import CustomUser
 
 class UserSignupSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     class Meta:
@@ -10,7 +11,7 @@ class UserSignupSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if data['password'] != data['password2']:
-            raise serializers.ValidationError('Passwords do not match')
+             raise serializers.ValidationError({'password': 'Passwords do not match'})
         
         return data
 
@@ -20,3 +21,12 @@ class UserSignupSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+    
+class UserLoginSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(max_length = 255)
+    class Meta:
+        model = CustomUser
+        fields = ['email','password']
+
+
+
