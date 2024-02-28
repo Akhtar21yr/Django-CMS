@@ -7,6 +7,7 @@ from .serializers import UserSignupSerializer,UserLoginSerializer,ContentItemSer
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from .models import CustomUser,ContentItem
+from django.db.models import Q
 
 
 # Create your views here.
@@ -58,7 +59,36 @@ class UserLogoutView(APIView):
         
 class ContentItemView(APIView):
     permission_classes = [IsAuthenticated]
+
+    def search(self, request):
+        user = request.user
+        search_query = request.query_params.get('q', '')
+
+        if user.is_admin:
+            contents = ContentItem.objects.filter(
+                Q(title__icontains=search_query) |
+                Q(body__icontains=search_query) |
+                Q(summary__icontains=search_query) |
+                Q(categories__icontains=search_query)
+            )
+        else:
+            contents = ContentItem.objects.filter(
+                Q(author=user) &
+                (Q(title__icontains=search_query) |
+                 Q(body__icontains=search_query) |
+                 Q(summary__icontains=search_query) |
+                 Q(categories__icontains=search_query))
+            )
+        
+        if contents:
+            serializer = ContentItemSerializer(contents, many=True)
+            return Response({'contents': serializer.data}, status=status.HTTP_200_OK)
+        else :
+            return Response({'msg':'no match data found'},status=status.HTTP_404_NOT_FOUND)
+
     def get(self,request,pk=None):
+        if 'q' in request.query_params:
+            return self.search(request)
         user = request.user
         if pk:
             try :
