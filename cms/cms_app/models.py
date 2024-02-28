@@ -47,6 +47,6 @@ class ContentItem(models.Model):
     title = models.CharField(max_length=30)
     body = models.CharField(max_length=300)
     summary = models.CharField(max_length=300)
-    document = models.FileField(upload_to='documents/' )
+    document = models.FileField(upload_to='documents/',null = True)
     categories = models.CharField(max_length=255,null = True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

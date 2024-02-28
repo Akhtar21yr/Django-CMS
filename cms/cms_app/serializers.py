@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser,ContentItem
 
 class UserSignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
@@ -30,3 +30,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
 
 
+class ContentItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContentItem
+        fields = ['title','body','summary']
