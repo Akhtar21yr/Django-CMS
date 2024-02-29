@@ -38,7 +38,8 @@ source venv/bin/activate  # for Windows- use venv\Scripts\activate
 
 
 3. Install the Project Dependencies:
-```--pip install -r requirements.txt```
+```bash
+pip install -r requirements
 
 
 4. Apply Migrations:
