@@ -33,22 +33,25 @@ In today's digital age, the need for an efficient and customizable content manag
    cd cms
 
 2. Create and Activate a Virtual Environment:
---python -m venv venv
+    ```bash
+    python -m venv venv
 source venv/bin/activate  # for Windows- use venv\Scripts\activate
 
 
 3. Install the Project Dependencies:
-```bash
-pip install -r requirements
+    ```bash
+    pip install -r requirements
 
 
 4. Apply Migrations:
-``--python manage.py makemigrations
---python manage.py migrate``
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate``
 
 
 5. Start the Development Server:
---python manage.py runserver
+    ```bash
+    python manage.py runserver
 
 
 6. Access CMS Project:
