@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from .models import CustomUser,ContentItem
 from django.db.models import Q
+from rest_framework.decorators import api_view
 
 
 # Create your views here.
@@ -151,6 +152,9 @@ class ContentItemView(APIView):
             return Response({'msg': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
         content.delete()
         return Response({'msg': 'Content deleted'}, status=status.HTTP_204_NO_CONTENT)
+    
+
+
         
         
         

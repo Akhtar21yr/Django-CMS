@@ -6,5 +6,5 @@ urlpatterns = [
     path('sign-in',views.UserLoginView.as_view()),
     path('logout',views.UserLogoutView.as_view()),
     path('content',views.ContentItemView.as_view()),
-    path('content/<int:pk>',views.ContentItemView.as_view())
+    path('content/<int:pk>',views.ContentItemView.as_view()),
 ]
