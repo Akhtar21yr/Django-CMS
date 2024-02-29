@@ -42,17 +42,14 @@ source venv/bin/activate  # for Windows- use venv\Scripts\activate
     ```bash
     pip install -r requirements
 
-
 4. Apply Migrations:
     ```bash
     python manage.py makemigrations
-    python manage.py migrate``
-
+    python manage.py migrate
 
 5. Start the Development Server:
     ```bash
     python manage.py runserver
-
 
 6. Access CMS Project:
 Visit http://localhost:8000/ in your web browser.
